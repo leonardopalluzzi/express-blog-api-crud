@@ -1,7 +1,14 @@
 const data = require('../data/posts');
 
 function index(req, res) {
-    res.json(data);
+    
+    let filterData = data;
+
+    if(req.query.tag){
+        filterData = data.filter(post => post.tags.includes(req.query.tag));
+    }
+
+    res.json(filterData);
 }
 
 function show(req, res) {
@@ -48,7 +55,7 @@ function destroy(req, res) {
 
     const currentSlug = data.find(post => post.slug == postSlug);
     console.log(currentSlug);
-    
+
     if (!currentSlug) {
         return res.status(404).json({
             error: 'Not found',
