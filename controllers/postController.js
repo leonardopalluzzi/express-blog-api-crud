@@ -5,10 +5,10 @@ function index(req, res) {
 }
 
 function show(req, res) {
-    
+
     const post = data.find(post => post.slug == req.params.slug);
 
-    if(!post){
+    if (!post) {
         return res.status(404).json({
             error: 'Not found',
             messager: 'Post not found'
@@ -45,24 +45,28 @@ function modify(req, res) {
 function destroy(req, res) {
     const postSlug = req.params.slug;
     console.log(postSlug);
+
+    const currentSlug = data.find(post => post.slug == postSlug);
+    console.log(currentSlug);
     
+    if (!currentSlug) {
+        return res.status(404).json({
+            error: 'Not found',
+            message: 'Post not found'
+        })
+    }
 
     data.forEach((post, i, arr) => {
-        const currentSlug = post.slug;
-        console.log(currentSlug);
-        
-        if(currentSlug === postSlug){
+        if (currentSlug === postSlug) {
             arr.splice(i, 1);
         }
     })
 
-    
-    
     console.log(data);
-    
-    
     res.sendStatus(204);
 }
+
+
 
 module.exports = {
     index,
