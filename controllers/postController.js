@@ -35,7 +35,25 @@ function modify(req, res) {
 }
 
 function destroy(req, res) {
-    res.send(`Delete the post: ${req.params.slug}`);
+    const postSlug = req.params.slug;
+    console.log(postSlug);
+    
+
+    data.forEach((post, i, arr) => {
+        const currentSlug = post.slug;
+        console.log(currentSlug);
+        
+        if(currentSlug === postSlug){
+            arr.splice(i, 1);
+        }
+    })
+
+    
+    
+    console.log(data);
+    
+    
+    res.sendStatus(204);
 }
 
 module.exports = {
