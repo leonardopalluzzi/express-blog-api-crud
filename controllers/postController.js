@@ -5,7 +5,15 @@ function index(req, res) {
 }
 
 function show(req, res) {
+    
     const post = data.find(post => post.slug == req.params.slug);
+
+    if(!post){
+        return res.status(404).json({
+            error: 'Not found',
+            messager: 'Post not found'
+        })
+    }
 
     //for loop implementation
     /*
