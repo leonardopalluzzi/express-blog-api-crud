@@ -1,38 +1,26 @@
 const express = require('express');
 const router = express.Router();
-const data = require('../posts');
+const postController = require('../controllers/postController');
 
 //middleware
 router.use(express.static('public'));
 
 //index
-router.get('/', (req, res) => {
-    
-});
+router.get('/', postController.index);
 
 //show
-router.get('/:slug', (req, res) => {
-    
-});
+router.get('/:slug', postController.show);
 
 //store
-router.post('/', (req, res) => {
-    
-});
+router.post('/', postController.store);
 
 //update
-router.put('/:slug', (req, res) => {
-    
-});
+router.put('/:slug', postController.update);
 
 //modify
-router.patch('/:slug', (req, res) => {
-    
-});
+router.patch('/:slug', postController.modify);
 
 //delete
-router.delete('/:slug', (req, res) => {
-    
-});
+router.delete('/:slug', postController.destroy);
 
 module.exports = router;
