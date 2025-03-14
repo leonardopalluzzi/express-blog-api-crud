@@ -8,6 +8,13 @@ function index(req, res) {
         filterData = data.filter(post => post.tags.includes(req.query.tag));
     }
 
+    if(filterData.length == 0){
+        return res.status(404).json({
+            error: 'Not found',
+            message: 'Tag not found in any post'
+        })
+    }
+
     res.json(filterData);
 }
 
