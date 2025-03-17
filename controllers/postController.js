@@ -45,6 +45,19 @@ function show(req, res) {
 }
 
 function store(req, res) {
+
+    //title input check
+    data.forEach(post => {
+        const inputSlug = req.body.title.replaceAll(' ', '-').toLowerCase();
+        const postSlug = post.slug;
+
+        if(inputSlug == postSlug){
+            return res.status(403).json({
+                error: 'Already exists',
+                message: 'This post already exist'
+            })
+        }
+    })
     //create new slug
     const newSlug = req.body.title.replaceAll(' ', '-').toLowerCase();
     console.log(newSlug);
