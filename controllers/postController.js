@@ -1,14 +1,14 @@
 const data = require('../data/posts');
 
 function index(req, res) {
-    
+
     let filterData = data;
 
-    if(req.query.tag){
+    if (req.query.tag) {
         filterData = data.filter(post => post.tags.includes(req.query.tag));
     }
 
-    if(filterData.length == 0){
+    if (filterData.length == 0) {
         return res.status(404).json({
             error: 'Not found',
             message: 'Tag not found in any post'
@@ -51,7 +51,7 @@ function store(req, res) {
         const inputSlug = req.body.title.replaceAll(' ', '-').toLowerCase();
         const postSlug = post.slug;
 
-        if(inputSlug == postSlug){
+        if (inputSlug == postSlug) {
             return res.status(403).json({
                 error: 'Already exists',
                 message: 'This post already exist'
@@ -73,16 +73,29 @@ function store(req, res) {
     data.push(newPost);
 
     console.log(data);
-    
+
     res.status(201);
     res.json(newPost);
-    
+
 }
 
 function update(req, res) {
 
+    const newSlug = req.body.title.replaceAll(' ', '-').toLowerCase();
+    let errorflag = false;
+
+    //title input check
+    data.forEach(post => {
+        const postSlug = post.slug;
+        //console.log(postSlug);
+
+        if (newSlug == postSlug) {
+            errorflag = true;
+        }
+    })
+    //console.log(errorflag);
+
     const currentSlug = req.params.slug;
-    
     const currentPost = data.find(post => post.slug == currentSlug);
 
     if(!currentPost){
@@ -90,23 +103,30 @@ function update(req, res) {
             error: "Not found",
             message: "Post not found"
         })
+    } else if (errorflag == true) {
+        return res.status(403).json({
+            error: 'Already exists',
+            message: 'This post already exist'
+        })
+    } else {
+        currentPost.title = req.body.title;
+        currentPost.slug = newSlug;
+        currentPost.content = req.body.content;
+        currentPost.image = req.body.image;
+        currentPost.tags = req.body.tags;
+
+        //console.log(data.forEach(post => console.log(post.slug)));
+
+        res.json(currentPost);
     }
-
-    currentPost.title = req.body.title;
-    currentPost.slug = req.body.title.replaceAll(' ', '-').toLowerCase();
-    currentPost.content = req.body.content;
-    currentPost.image = req.body.image;
-    currentPost.tags = req.body.tags;
-
-    res.json(currentPost);
 }
 
 function modify(req, res) {
     const currentSlug = req.params.slug;
-    
+
     const currentPost = data.find(post => post.slug == currentSlug);
 
-    if(!currentPost){
+    if (!currentPost) {
         return res.status(404).json({
             error: "Not found",
             message: "Post not found"
@@ -117,7 +137,7 @@ function modify(req, res) {
     currentPost.slug = req.body.title.replaceAll(' ', '-').toLowerCase();
 
     console.log(currentPost);
-    
+
 
     res.json(currentPost);
 }
