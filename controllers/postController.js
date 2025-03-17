@@ -45,7 +45,9 @@ function show(req, res) {
 }
 
 function store(req, res) {
-    res.send('Upload a new post');
+    const newId = data[data.length - 1].id;
+
+    
 }
 
 function update(req, res) {
