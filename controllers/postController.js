@@ -67,7 +67,25 @@ function store(req, res) {
 }
 
 function update(req, res) {
-    res.send(`Update the post: ${req.params.slug}`);
+
+    const currentSlug = req.params.slug;
+    
+    const currentPost = data.find(post => post.slug == currentSlug);
+
+    if(!currentPost){
+        return res.status(404).json({
+            error: "Not found",
+            message: "Post not found"
+        })
+    }
+
+    currentPost.title = req.body.title;
+    currentPost.slug = req.body.title.replaceAll(' ', '-').toLowerCase();
+    currentPost.content = req.body.content;
+    currentPost.image = req.body.image;
+    currentPost.tags = req.body.tags;
+
+    res.json(currentPost);
 }
 
 function modify(req, res) {
