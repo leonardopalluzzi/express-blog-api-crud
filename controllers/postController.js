@@ -46,7 +46,7 @@ function show(req, res) {
 
 function store(req, res) {
     //create new slug
-    const newSlug = req.body.title.replace(/\s+/g, '-').toLowerCase();
+    const newSlug = req.body.title.replaceAll(' ', '-').toLowerCase();
     console.log(newSlug);
 
     const newPost = {
@@ -89,7 +89,24 @@ function update(req, res) {
 }
 
 function modify(req, res) {
-    res.send(`Modify the post: ${req.params.slug}`);
+    const currentSlug = req.params.slug;
+    
+    const currentPost = data.find(post => post.slug == currentSlug);
+
+    if(!currentPost){
+        return res.status(404).json({
+            error: "Not found",
+            message: "Post not found"
+        })
+    }
+
+    currentPost.title = req.body.title;
+    currentPost.slug = req.body.title.replaceAll(' ', '-').toLowerCase();
+
+    console.log(currentPost);
+    
+
+    res.json(currentPost);
 }
 
 function destroy(req, res) {
