@@ -45,8 +45,24 @@ function show(req, res) {
 }
 
 function store(req, res) {
-    const newId = data[data.length - 1].id;
+    //create new slug
+    const newSlug = req.body.title.replace(/\s+/g, '-').toLowerCase();
+    console.log(newSlug);
 
+    const newPost = {
+        title: req.body.title,
+        slug: newSlug,
+        content: req.body.content,
+        image: req.body.image,
+        tags: req.body.tags
+    }
+
+    data.push(newPost);
+
+    console.log(data);
+    
+    res.status(201);
+    res.json(newPost);
     
 }
 

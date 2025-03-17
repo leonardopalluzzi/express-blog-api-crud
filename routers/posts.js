@@ -2,9 +2,6 @@ const express = require('express');
 const router = express.Router();
 const postController = require('../controllers/postController');
 
-//middleware
-router.use(express.static('public'));
-
 //index
 router.get('/', postController.index);
 
