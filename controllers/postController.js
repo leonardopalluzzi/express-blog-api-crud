@@ -122,24 +122,24 @@ function update(req, res) {
 }
 
 function modify(req, res) {
-    const currentSlug = req.params.slug;
 
+    const currentSlug = req.params.slug;
     const currentPost = data.find(post => post.slug == currentSlug);
 
-    if (!currentPost) {
+    if(!currentPost){
         return res.status(404).json({
             error: "Not found",
             message: "Post not found"
         })
+    } else {
+        currentPost.content = req.body.content;
+        currentPost.image = req.body.image;
+        currentPost.tags = req.body.tags;
+
+        //console.log(data.forEach(post => console.log(post.slug)));
+
+        res.json(currentPost);
     }
-
-    currentPost.title = req.body.title;
-    currentPost.slug = req.body.title.replaceAll(' ', '-').toLowerCase();
-
-    console.log(currentPost);
-
-
-    res.json(currentPost);
 }
 
 function destroy(req, res) {
