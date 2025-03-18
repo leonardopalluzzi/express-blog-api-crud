@@ -14,6 +14,8 @@ app.use('/api/v1/posts', postsRouter);
 //img middleware
 app.use(express.static('public'));
 
+app.use(serverError);
+
 //server on listen
 app.listen(port, () => {
     console.log(`server running on http://localhost:${port}`); 
