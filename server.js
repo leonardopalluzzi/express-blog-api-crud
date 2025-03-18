@@ -14,7 +14,11 @@ app.use('/api/v1/posts', postsRouter);
 //img middleware
 app.use(express.static('public'));
 
+//server error middleware
 app.use(serverError);
+
+//404 middleware
+app.use(error_404);
 
 //server on listen
 app.listen(port, () => {
