@@ -98,7 +98,7 @@ function update(req, res) {
     const currentSlug = req.params.slug;
     const currentPost = data.find(post => post.slug == currentSlug);
 
-    if(!currentPost){
+    if (!currentPost) {
         return res.status(404).json({
             error: "Not found",
             message: "Post not found"
@@ -126,7 +126,7 @@ function modify(req, res) {
     const currentSlug = req.params.slug;
     const currentPost = data.find(post => post.slug == currentSlug);
 
-    if(!currentPost){
+    if (!currentPost) {
         return res.status(404).json({
             error: "Not found",
             message: "Post not found"
@@ -157,7 +157,7 @@ function destroy(req, res) {
     }
 
     data.forEach((post, i, arr) => {
-        if (currentSlug === postSlug) {
+        if (currentSlug == postSlug) {
             arr.splice(i, 1);
         }
     })
