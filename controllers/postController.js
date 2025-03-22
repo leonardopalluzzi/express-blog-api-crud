@@ -162,7 +162,7 @@ function destroy(req, res) {
         }
     })
 
-    console.log(data);
+    console.log(currentSlug, postSlug);
     res.sendStatus(204);
 }
 
