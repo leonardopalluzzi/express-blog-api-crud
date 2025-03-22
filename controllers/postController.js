@@ -162,11 +162,13 @@ function destroy(req, res) {
 
     data.forEach((post, i, arr) => {
         if (currentSlug.slug == postSlug) {
+            console.log(currentSlug.slug, postSlug);
+
             arr.splice(arr.indexOf(currentSlug), 0);
         }
     })
 
-    console.log(currentSlug.slug, postSlug);
+    //console.log(currentSlug.slug, postSlug);
     res.sendStatus(204);
 }
 
