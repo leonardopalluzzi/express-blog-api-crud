@@ -15,6 +15,10 @@ function index(req, res) {
         })
     }
 
+    console.log(filterData);
+    console.log(data);
+
+
     res.json(filterData);
 }
 
