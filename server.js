@@ -21,7 +21,7 @@ app.use(serverError);
 app.use(error_404);
 
 //server on listen
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
     console.log(`server running on http://0.0.0.0:${port}`);
 });
 
