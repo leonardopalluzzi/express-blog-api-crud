@@ -161,10 +161,10 @@ function destroy(req, res) {
     }
 
     data.forEach((post, i, arr) => {
-        if (currentSlug.slug == postSlug) {
+        if (post.slug == postSlug) {
             console.log(currentSlug.slug, postSlug);
 
-            arr.splice(arr.indexOf(currentSlug), 0);
+            arr.splice(arr.indexOf(post), 1);
         }
     })
 
