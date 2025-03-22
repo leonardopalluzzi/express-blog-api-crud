@@ -144,10 +144,10 @@ function modify(req, res) {
 
 function destroy(req, res) {
     const postSlug = req.params.slug;
-    console.log(postSlug);
+    //console.log(postSlug);
 
     const currentSlug = data.find(post => post.slug == postSlug);
-    console.log(currentSlug);
+    //console.log(currentSlug);
 
     if (!currentSlug) {
         return res.status(404).json({
@@ -162,7 +162,7 @@ function destroy(req, res) {
         }
     })
 
-    console.log(currentSlug, postSlug);
+    console.log(currentSlug.slug, postSlug);
     res.sendStatus(204);
 }
 
