@@ -158,7 +158,7 @@ function destroy(req, res) {
 
     data.forEach((post, i, arr) => {
         if (currentSlug.slug == postSlug) {
-            arr.splice(i, 1);
+            arr.splice(data.indexOf(currentSlug), 1);
         }
     })
 
