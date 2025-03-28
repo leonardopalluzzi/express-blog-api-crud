@@ -1,11 +1,17 @@
 const express = require('express');
 const app = express();
+const cors = require('cors')
 const port = 3000;
 const postsRouter = require('./routers/posts');
 
 //import error handlers
 const serverError = require('./middlewares/serverError');
 const error_404 = require('./middlewares/404_Error');
+
+//cors middlware
+app.use(cors({
+    origin: 'http://localhost:3000'
+}));
 
 //parse middleware
 app.use(express.json());
