@@ -10,7 +10,7 @@ const error_404 = require('./middlewares/404_Error');
 
 //cors middlware
 app.use(cors({
-    origin: 'http://192.168.1.63:5173'
+    origin: 'http://localhost:5173'
 }));
 
 //parse middleware
